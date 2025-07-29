@@ -59,9 +59,10 @@ class QHashSynth(AbstractSynth):
                     sb_pair = self._valobj.CreateValueFromAddress('pair', entries_addr + offset * entry_size, sb_int)
                     pair = KeyValuePair(sb_pair, t_key, t_value)
 
-                    self._values.append(pair.k())
-                    self._values.append(pair.v())
-
+                    # MBW -- I prefer to see key and value on the same line
+                    # self._values.append(pair.k())
+                    # self._values.append(pair.v())
+                    self._values.append(self._valobj.CreateValueFromData(f'[{pair.k().summary}]', pair.v().data, t_value))
         return False
 
     def _max_num_buckets(self) -> int:
